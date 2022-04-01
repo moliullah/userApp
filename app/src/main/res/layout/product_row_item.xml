@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="product"
+            type="com.example.myuserapph.models.UserProductModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/productRowCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:contentPadding="4dp"
+        app:cardCornerRadius="4dp"
+        android:clickable="true"
+        app:cardElevation="4dp"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    app:setImageUrl="@{product.productImageUrl}"
+                    tools:src="@mipmap/ic_launcher" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewPFId"
+                    android:src="@drawable/ic_baseline_favorite_border_24">
+
+                </ImageView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewAddPId"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_baseline_add_shopping_cart_24">
+                </ImageView>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewRemovePId"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/purple_200"
+                    android:src="@drawable/ic_baseline_remove_shopping_cart_24">
+                </ImageView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:alpha="0.5"
+
+                    android:padding="4dp">
+
+                </View>
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{product.productName}"
+                android:textSize="16sp"
+                android:padding="3dp"
+                tools:text="Smart Watch"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{`BDT`+product.price}"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:padding="3dp"
+                tools:text="BDT3500"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
