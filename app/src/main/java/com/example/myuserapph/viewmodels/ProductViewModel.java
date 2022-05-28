@@ -30,7 +30,9 @@ public class ProductViewModel extends ViewModel {
     public MutableLiveData<List<ProductModel>> productListLiveData = new MutableLiveData<>();
     public MutableLiveData<List<UserProductModel>> userProductListLiveData = new MutableLiveData<>();
     public MutableLiveData<List<CartModel>> cartListLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<CartModel>> carConfarmationtListLiveData = new MutableLiveData<>();
     public List<CartModel> cartModelList = new ArrayList<>();
+    public String paymentMethod = Constant.PaymentMethod.COD;
     public ProductViewModel() {
         getAllCategories();
         getAllProducts();
@@ -73,6 +75,7 @@ public class ProductViewModel extends ViewModel {
                         cartModels.add(doc.toObject(CartModel.class));
                     }
                     cartListLiveData.postValue(cartModels);
+                    carConfarmationtListLiveData.postValue(cartModels);
                 });
     }
 
@@ -188,6 +191,22 @@ public class ProductViewModel extends ViewModel {
                             value.toObject(ProductModel.class));
                 });
         return productLiveData;
+    }
+    public void clearCart(String uid, List<CartModel> cartModels) {
+        final WriteBatch writeBatch = db.batch();
+        for (CartModel c : cartModels) {
+            final DocumentReference doc = db.collection(Constant.DbCollection.COLLECTION_USERS)
+                    .document(uid)
+                    .collection(Constant.DbCollection.COLLECTION_CART)
+                    .document(c.getProductId());
+            writeBatch.delete(doc);
+        }
+        writeBatch.commit()
+                .addOnSuccessListener(unused -> {
+                    getAllCartItems(uid);
+                })
+                .addOnFailureListener(unused -> {});
+
     }
     public double calculateTotalPrice(List<CartModel> cartModels) {
         double total = 0.0;

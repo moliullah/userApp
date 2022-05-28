@@ -40,5 +40,36 @@
         android:id="@+id/checkoutFragment"
         android:name="com.example.myuserapph.CheckoutFragment"
         android:label="fragment_checkout"
-        tools:layout="@layout/fragment_checkout" />
+        tools:layout="@layout/fragment_checkout" >
+        <action
+            android:id="@+id/cof_to_cf"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/cof_to_To_cf"
+            app:destination="@id/confirmationToFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.example.myuserapph.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation" />
+    <fragment
+        android:id="@+id/userOrderFragment2"
+        android:name="com.example.myuserapph.UserOrderFragment"
+        android:label="fragment_user_order"
+        tools:layout="@layout/fragment_user_order" />
+    <fragment
+        android:id="@+id/confirmationToFragment"
+        android:name="com.example.myuserapph.ConfirmationToFragment"
+        android:label="fragment_confirmation_to"
+        tools:layout="@layout/fragment_confirmation_to" >
+        <action
+            android:id="@+id/cfTo_to_sf"
+            app:destination="@id/orderSuccessfulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderSuccessfulFragment"
+        android:name="com.example.myuserapph.OrderSuccessfulFragment"
+        android:label="fragment_order_successful"
+        tools:layout="@layout/fragment_order_successful" />
 </navigation>

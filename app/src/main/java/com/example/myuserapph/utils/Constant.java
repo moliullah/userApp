@@ -12,14 +12,17 @@ public class Constant {
     public static final String DAY = "day";
     public static final String HOUR = "hour";
     public static final String MINUTE = "minute";
+    public static final String TAKA = "৳";
 
-    public static class item{
-        public final static String ADD_PRODUCTS="AddProducts";
-        public final static String VIEWPRODUCT="ViewProduct";
-        public final static String ADD_CATAGORIS="Add Catagoris";
-        public final static String VIEW_ORDERS="View Orders";
-        public final static String VIEW_USERS="View Users";
+    public static class PaymentMethod {
+        public static final String COD = "Cash on Delivery";
+        public static final String ONLINE = "Online Payment";
+    }
 
+    public static class OrderStatus{
+        public static final String PENDING = "Pending";
+        public static final String DELIVERED = "Delivered";
+        public static final String CANCELLED = "Cancelled";
     }
 
     public static class DbCollection{
@@ -29,9 +32,8 @@ public class Constant {
         public static final String COLLECTION_ORDERS = "Orders";
         public static final String COLLECTION_USERS = "Users";
         public static final String COLLECTION_CART = "Cart";
-    }
-    public static class PaymentMehod{
-        public static final String COD="Cash On Delivery";
-        public static final String ONLINE="ONLENE";
+        public static final String COLLECTION_ORDER_DETAILS = "OrderDetails";
+        public static final String COLLECTION_ORDER_SETTINGS = "OrderSettings";
+        public static final String DOCUMENT_ORDER_SETTING = "Settings";
     }
 }

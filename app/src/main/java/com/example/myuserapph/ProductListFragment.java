@@ -34,7 +34,7 @@ public class ProductListFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentProductListBinding.inflate(inflater);
         loginViewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
-        loginViewModel.getAuthenticateStateLiveData().observe(getViewLifecycleOwner(), new Observer<LoginViewModel.AuthenticateState>() {
+        /*loginViewModel.getAuthenticateStateLiveData().observe(getViewLifecycleOwner(), new Observer<LoginViewModel.AuthenticateState>() {
             @Override
             public void onChanged(LoginViewModel.AuthenticateState authenticateState) {
                 Log.e(TAG,"Welcome plf");
@@ -44,6 +44,8 @@ public class ProductListFragment extends Fragment {
                 }
             }
         });
+
+         */
         productViewModel = new ViewModelProvider(requireActivity())
                 .get(ProductViewModel.class);
         adapter = new ProductAdapter(productId -> {

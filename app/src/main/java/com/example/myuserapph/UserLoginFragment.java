@@ -20,6 +20,7 @@ public class UserLoginFragment extends Fragment {
     private FragmentUserLoginBinding binding;
     private LoginViewModel loginViewModel;
     private boolean isLogin;
+    private String phoneNumber;
     public UserLoginFragment() {
     }
     @Override
@@ -36,7 +37,7 @@ public class UserLoginFragment extends Fragment {
             isLogin=false;
             authenticate();
         });
-        loginViewModel.getAuthenticateStateLiveData().observe(getViewLifecycleOwner(), new Observer<LoginViewModel.AuthenticateState>() {
+       /* loginViewModel.getAuthenticateStateLiveData().observe(getViewLifecycleOwner(), new Observer<LoginViewModel.AuthenticateState>() {
             @Override
             public void onChanged(LoginViewModel.AuthenticateState authenticateState) {
                 if (authenticateState== LoginViewModel.AuthenticateState.AUTHENTICATED){
@@ -45,6 +46,9 @@ public class UserLoginFragment extends Fragment {
                 }
             }
         });
+
+        */
+
         loginViewModel.getErrorMsgLiveData().observe(getViewLifecycleOwner(), s -> {
             binding.utvTv.setText(s);
         });
@@ -58,7 +62,12 @@ public class UserLoginFragment extends Fragment {
         if (isLogin) {
             loginViewModel.userLogin(email, password);
         }else {
-            loginViewModel.userRegistration(email,password);
+           // loginViewModel.userRegistration(email,password);
+           // createPhoneAuthFlow();
         }
+    }
+
+    private void createPhoneAuthFlow() {
+
     }
 }

@@ -1,7 +1,6 @@
 package com.example.myuserapph.models;
 
 public class CartModel {
-
     private String productId;
     private String productName;
     private double productPrice;

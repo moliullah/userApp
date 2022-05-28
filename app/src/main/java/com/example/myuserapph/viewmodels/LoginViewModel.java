@@ -1,5 +1,7 @@
 package com.example.myuserapph.viewmodels;
 
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,6 +23,7 @@ public class LoginViewModel extends ViewModel {
         AUTHENTICATED,  UNAUTHENTICATED
     }
     private MutableLiveData <AuthenticateState> authenticateStateLiveData;
+    private MutableLiveData<EcomUser> ecomUserMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<String> errorMsgLiveData;
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -37,6 +40,11 @@ public class LoginViewModel extends ViewModel {
         }
 
     }
+
+    public MutableLiveData<EcomUser> getEcomUserMutableLiveData() {
+        return ecomUserMutableLiveData;
+    }
+
     public LiveData<AuthenticateState> getAuthenticateStateLiveData() {
         return authenticateStateLiveData;
     }
@@ -79,7 +87,7 @@ public class LoginViewModel extends ViewModel {
         FirebaseFirestore db=FirebaseFirestore.getInstance();
         final DocumentReference documentReference
                 =db.collection(Constant.DbCollection.COLLECTION_USERS).document(user.getUid());
-        final EcomUser ecomUser=new EcomUser(user.getUid(),null,user.getEmail(),null);
+        final EcomUser ecomUser=new EcomUser(user.getUid(),null,user.getEmail(),null,null);
         documentReference.set(ecomUser).addOnSuccessListener(unused -> {
 
         }).addOnFailureListener(e -> {
@@ -90,12 +98,36 @@ public class LoginViewModel extends ViewModel {
         final DocumentReference doc =
                 db.collection(Constant.DbCollection.COLLECTION_USERS)
                         .document(user.getUid());
-        doc.update("deliveryAddress", address)
+        doc.update("deleveryAddress",address)
                 .addOnSuccessListener(unused -> {
                     actionCompleteListener.onSuccess();
                 })
                 .addOnFailureListener(unused -> {
                     actionCompleteListener.onFailure();
+                   // Toast.makeText(ge, "", Toast.LENGTH_SHORT).show();
                 });
+    }
+
+    public LiveData<EcomUser> getUserData() {
+        final MutableLiveData<EcomUser> userLiveData = new MutableLiveData<>();
+        db.collection(Constant.DbCollection.COLLECTION_USERS)
+                .document(user.getUid())
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    final EcomUser ecomUser = documentSnapshot.toObject(EcomUser.class);
+                   userLiveData.postValue(ecomUser);
+                  ecomUserMutableLiveData.postValue(ecomUser);
+
+                }).addOnFailureListener(e -> {
+
+        });
+       return userLiveData;
+    }
+
+    public void logout() {
+        if (user != null) {
+            auth.signOut();
+            authenticateStateLiveData.postValue(AuthenticateState.UNAUTHENTICATED);
+        }
     }
 }

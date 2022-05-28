@@ -6,14 +6,16 @@ public class EcomUser {
     private String email;
     private String photo;
     private String deleveryAddress;
+    private String phoneNumber;
     public EcomUser() {
     }
 
-    public EcomUser(String uid, String name, String email, String photo) {
+    public EcomUser(String uid, String name, String email, String photo, String phoneNumber) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.photo = photo;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getUid() {
